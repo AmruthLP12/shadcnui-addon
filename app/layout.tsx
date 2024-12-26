@@ -9,6 +9,13 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+
+export const metadata = {
+  title: "shadcn-ui/addons",
+  description:
+    "Enhance your UI with powerful addons for shadcn-ui, designed to extend functionality and streamline your development workflow.",
+};
+
 export default function RootLayout({
   children,
 }: {

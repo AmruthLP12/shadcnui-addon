@@ -3,6 +3,12 @@ import { Navbar } from "@/components/navbar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import "../globals.css";
 
+export const metadata = {
+  title: "shadcn-ui/addons",
+  description:
+    "Enhance your UI with powerful addons for shadcn-ui, designed to extend functionality and streamline your development workflow.",
+};
+
 export default function LayoutWithSidebar({
   children,
 }: {

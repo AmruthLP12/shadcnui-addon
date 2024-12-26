@@ -19,8 +19,8 @@ import Link from 'next/link'
 const searchItems = [
   { title: 'Home', url: '/' },
   { title: 'Getting Started', url: '/docs' },
-  { title: 'Components', url: 'docs/components' },
-  { title: 'API Reference', url: 'docs/api-reference' },
+  { title: 'Progress Bar', url: '/docs/animated-progress-bar' },
+  { title: 'BackgroundOverlayCard', url: '/docs/card' },
 ]
 
 export function Navbar() {
@@ -69,7 +69,7 @@ export function Navbar() {
             <Link href="/docs" className="transition-colors hover:text-foreground/80 text-foreground/60">
               Docs
             </Link>
-            <Link href="/components" className="transition-colors hover:text-foreground/80 text-foreground/60">
+            <Link href="/docs/animated-progress-bar" className="transition-colors hover:text-foreground/80 text-foreground/60">
               Components
             </Link>
           </nav>
@@ -116,7 +116,7 @@ export function Navbar() {
             </DialogContent>
           </Dialog>
           <Button variant="ghost" size="icon" aria-label="GitHub">
-            <a href="https://github.com/AmruthLP12/shadcn-ui-addon" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/AmruthLP12/shadcnui-addon" target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4" />
               <span className="sr-only">GitHub</span>
             </a>

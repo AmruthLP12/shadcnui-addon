@@ -28,7 +28,7 @@ export default function Home() {
           <CustomButton href="https://ui.shadcn.com/" variant="secondary" icon={<SiShadcnui />} external>
             ShadCN
           </CustomButton>
-          <CustomButton href="https://github.com/AmruthLP12/shadcn-ui-addon" variant="accent" icon={<Github />} external>
+          <CustomButton href="https://github.com/AmruthLP12/shadcnui-addon" variant="accent" icon={<Github />} external>
             GitHub
           </CustomButton>
         </div>

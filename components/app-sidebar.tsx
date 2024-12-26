@@ -22,10 +22,10 @@ const navItems = [
     items: [{ title: "Introduction", url: "/docs" }],
   },
   {
-    title: "Core Concepts",
+    title: "Components",
     items: [
-      { title: "Components", url: "/components" },
-      { title: "API Reference", url: "/api-reference" },
+      { title: "Progress Bar", url: "/docs/animated-progress-bar" },
+      { title: "Background Overlay Card", url: "/docs/card" },
     ],
   },
   {

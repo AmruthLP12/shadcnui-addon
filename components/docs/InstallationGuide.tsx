@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
+import { Highlight, themes } from "prism-react-renderer"
 
 interface InstallationGuideProps {
   componentName: string;
@@ -65,9 +66,19 @@ export const InstallationGuide: React.FC<InstallationGuideProps> = ({
               </Button>
             </div>
             <div className="relative">
-              <pre className="overflow-x-auto rounded-lg bg-muted p-4 max-h-[300px]">
-                <code className="text-sm">{displayedCode}</code>
-              </pre>
+            <Highlight  theme={themes.dracula}  code={displayedCode} language="tsx">
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                  <pre className={`${className} text-sm`} style={{ ...style, padding: '16px' }}>
+                    {tokens.map((line, i) => (
+                      <div {...getLineProps({ line, key: i })}>
+                        {line.map((token, key) => (
+                          <span {...getTokenProps({ token, key })} />
+                        ))}
+                      </div>
+                    ))}
+                  </pre>
+                )}
+              </Highlight>
               {!isExpanded && (
                 <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-muted to-transparent" />
               )}

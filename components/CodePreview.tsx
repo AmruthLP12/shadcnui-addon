@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Check, Copy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Highlight, themes } from "prism-react-renderer"
 
 interface CodePreviewProps {
   code: string
@@ -62,9 +63,20 @@ export const CodePreview: React.FC<CodePreviewProps> = ({ code, preview }) => {
                 <Copy className="h-4 w-4" />
               )}
             </Button>
-            <pre className="overflow-x-auto overflow-y-auto max-h-[300px] rounded-lg bg-muted p-4">
-              <code className="text-sm">{code}</code>
-            </pre>
+            <Highlight  theme={themes.dracula}  code={code} language="tsx">
+                {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                  <pre className={`${className} text-sm`} style={{ ...style, padding: '16px' }}>
+                    {tokens.map((line, i) => (
+                      <div {...getLineProps({ line, key: i })}>
+                        {line.map((token, key) => (
+                          <span {...getTokenProps({ token, key })} />
+                        ))}
+                      </div>
+                    ))}
+                  </pre>
+                )}
+              </Highlight>
+          
           </div>
         )}
       </div>
