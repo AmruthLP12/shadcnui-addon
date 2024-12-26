@@ -19,7 +19,7 @@ export default function RootLayout({
       <head>
         {/* Google site verification */}
         <meta name="google-site-verification" content="m3gcO3z77CpmDFtlEBa5Qk-g2yMOUvIFj34TKqbJMoU" />
-      </head>
+      </head> 
       <body className={`${poppins.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="flex flex-col min-h-screen">
