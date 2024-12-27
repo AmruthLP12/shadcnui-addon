@@ -1,10 +1,8 @@
 "use client";
 
+import { AnimatedProgressBarExamples } from "@/app/Examples/Examples";
 import { AnimatedProgressBar } from "@/components/AnimatedProgressBar/AnimatedProgressBar";
 import { ReusablePage } from "@/components/ReusablePage";
-import ProgressBarWithControls from "@/components/ui/ProgressBarWithControls";
-
-
 
 const componentCode = `'use client'
 
@@ -87,80 +85,7 @@ const Demo = () => {
   );
 };`;
 
-const examples = [
-  {
-    title: "Custom Colors",
-    code: `<AnimatedProgressBar 
-  percent={75} 
-  duration={1000} 
-  barColor="#10b981" 
-  backgroundColor="#d1fae5" 
-  height={16} 
-  animated={true} 
-/>`,
-    preview: (
-      <AnimatedProgressBar
-        percent={75}
-        duration={1000}
-        barColor="#10b981"
-        backgroundColor="#d1fae5"
-        height={16}
-        animated={true}
-      />
-    ),
-  },
-  {
-    title: "Without Animation",
-    code: `<AnimatedProgressBar 
-  percent={50} 
-  duration={0} 
-  barColor="#f59e0b" 
-  backgroundColor="#fef3c7" 
-  height={24} 
-  animated={false} 
-/>`,
-    preview: (
-      <AnimatedProgressBar
-        percent={50}
-        duration={0}
-        barColor="#f59e0b"
-        backgroundColor="#fef3c7"
-        height={24}
-        animated={false}
-      />
-    ),
-  },
-  {
-    title: "ProgressBar With Controls",
-    code: `import { AnimatedProgressBar } from '@/components/AnimatedProgressBar';
-
-const InteractiveDemo = () => {
-  const [progress, setProgress] = useState(0);
-
-  return (
-    <div className="space-y-4">
-      <AnimatedProgressBar
-        percent={progress}
-        duration={1000}
-        barColor="#3b82f6"
-        backgroundColor="#e2e8f0"
-        height={20}
-        animated={true}
-      />
-      <div className="flex flex-wrap space-x-2">
-        <Button onClick={() => setProgress(Math.max(0, progress - 20))}>
-          Decrease
-        </Button>
-        <Button onClick={() => setProgress(Math.min(100, progress + 20))}>
-          Increase
-        </Button>
-      </div>
-    </div>
-  );
-};`,
-    preview: <ProgressBarWithControls />,
-  },
-];
+const examples = AnimatedProgressBarExamples;
 
 export default function AnimatedProgressPage() {
   return (

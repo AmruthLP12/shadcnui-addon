@@ -1,7 +1,7 @@
-// components/ui/ReusablePage.tsx
 'use client';
 
 import React from 'react';
+import { Metadata } from 'next';
 import { PageLayout } from '@/components/ui/PageLayout';
 import { Badge } from '@/components/ui/badge';
 import { Section } from '@/components/ui/Section';

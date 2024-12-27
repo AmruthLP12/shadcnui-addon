@@ -19,6 +19,8 @@ export const InstallationGuide: React.FC<InstallationGuideProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const formattedComponentName = componentName.trim().replace(/\s+/g, "");
+
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
   const copyToClipboard = async () => {
@@ -42,7 +44,7 @@ export const InstallationGuide: React.FC<InstallationGuideProps> = ({
             </div>
             <pre className="overflow-x-auto rounded-lg bg-muted p-4">
               <code>
-                components/{componentName}/{componentName}.tsx
+                components/{formattedComponentName}/{formattedComponentName}.tsx
               </code>
             </pre>
           </div>
@@ -79,8 +81,13 @@ export const InstallationGuide: React.FC<InstallationGuideProps> = ({
                   getTokenProps,
                 }) => (
                   <pre
-                    className={`${className} text-sm`}
-                    style={{ ...style, padding: "16px" }}
+                    className={`${className} text-sm h-64 overflow-y-auto rounded-lg border`}
+                    style={{
+                      ...style,
+                      padding: "16px",
+                      whiteSpace: "pre-wrap", // Enables word wrapping
+                      wordBreak: "break-word", // Breaks long words
+                    }}
                   >
                     {tokens.map((line, i) => (
                       <div

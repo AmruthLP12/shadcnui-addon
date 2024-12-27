@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { AnimatedProgressBar } from '@/components/AnimatedProgressBar/AnimatedProgressBar';
-import { Button } from '@/components/ui/button';
+'use client'
+import React, { useState } from "react";
+import { AnimatedProgressBar } from "@/components/AnimatedProgressBar/AnimatedProgressBar";
+import { Button } from "@/components/ui/button";
 
 const ProgressBarWithControls = () => {
   const [progress, setProgress] = useState(0);
@@ -16,8 +17,15 @@ const ProgressBarWithControls = () => {
         animated={true}
       />
       <div className="flex flex-wrap space-x-2">
-        <Button onClick={() => setProgress(Math.max(0, progress - 20))}>Decrease</Button>
-        <Button onClick={() => setProgress(Math.min(100, progress + 20))}>Increase</Button>
+        <Button
+          onClick={() => setProgress(Math.max(0, progress - 20))}
+          variant={'destructive'}
+        >
+          Decrease
+        </Button>
+        <Button onClick={() => setProgress(Math.min(100, progress + 20))}>
+          Increase
+        </Button>
       </div>
     </div>
   );

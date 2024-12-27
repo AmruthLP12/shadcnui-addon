@@ -66,20 +66,29 @@ export const CodePreview: React.FC<CodePreviewProps> = ({ code, preview }) => {
             <Highlight theme={themes.dracula} code={code} language="tsx">
               {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre
-                  className={`${className} text-sm`}
-                  style={{ ...style, padding: "16px" }}
-                >
-                  {tokens.map((line, i) => (
-                    <div key={`line-${i}`} {...getLineProps({ line, key: i })}>
-                      {line.map((token, key) => (
-                        <span
-                          key={`token-${key}`}
-                          {...getTokenProps({ token, key })}
-                        />
-                      ))}
-                    </div>
-                  ))}
-                </pre>
+                className={`${className} text-sm h-64 overflow-y-auto rounded-lg border`}
+                style={{
+                  ...style,
+                  padding: "16px",
+                  whiteSpace: "pre-wrap", // Enables word wrapping
+                  wordBreak: "break-word", // Breaks long words
+                }}
+              >
+                {tokens.map((line, i) => (
+                  <div
+                    key={`line-${i}`}
+                    {...getLineProps({ line, key: i })}
+                  >
+                    {line.map((token, key) => (
+                      <span
+                        key={`token-${key}`}
+                        {...getTokenProps({ token, key })}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+              
               )}
             </Highlight>
           </div>
