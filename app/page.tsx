@@ -1,12 +1,7 @@
-import { BlocksIcon, Github } from 'lucide-react'
-import type { Metadata } from "next"
-import { SiShadcnui } from "react-icons/si"
 import { CustomButton } from "@/components/CustomButton"
+import { BlocksIcon, Github } from 'lucide-react'
+import { SiShadcnui } from "react-icons/si"
 
-// export const metadata: Metadata = {
-//   title: "Welcome Page",
-//   description: "Welcome to shadcn-addons page",
-// }
 
 export default function Home() {
   return (
