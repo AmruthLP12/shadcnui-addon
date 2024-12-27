@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
-import { Highlight, themes } from "prism-react-renderer"
+import { Highlight, themes } from "prism-react-renderer";
 
 interface InstallationGuideProps {
   componentName: string;
@@ -66,13 +66,32 @@ export const InstallationGuide: React.FC<InstallationGuideProps> = ({
               </Button>
             </div>
             <div className="relative">
-            <Highlight  theme={themes.dracula}  code={displayedCode} language="tsx">
-                {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                  <pre className={`${className} text-sm`} style={{ ...style, padding: '16px' }}>
+              <Highlight
+                theme={themes.dracula}
+                code={displayedCode}
+                language="tsx"
+              >
+                {({
+                  className,
+                  style,
+                  tokens,
+                  getLineProps,
+                  getTokenProps,
+                }) => (
+                  <pre
+                    className={`${className} text-sm`}
+                    style={{ ...style, padding: "16px" }}
+                  >
                     {tokens.map((line, i) => (
-                      <div {...getLineProps({ line, key: i })}>
+                      <div
+                        key={`line-${i}`}
+                        {...getLineProps({ line, key: i })}
+                      >
                         {line.map((token, key) => (
-                          <span {...getTokenProps({ token, key })} />
+                          <span
+                            key={`token-${key}`}
+                            {...getTokenProps({ token, key })}
+                          />
                         ))}
                       </div>
                     ))}

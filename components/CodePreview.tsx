@@ -1,45 +1,45 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { Check, Copy } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Highlight, themes } from "prism-react-renderer"
+import React, { useState } from "react";
+import { Check, Copy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Highlight, themes } from "prism-react-renderer";
 
 interface CodePreviewProps {
-  code: string
-  preview: React.ReactNode
+  code: string;
+  preview: React.ReactNode;
 }
 
 export const CodePreview: React.FC<CodePreviewProps> = ({ code, preview }) => {
-  const [activeTab, setActiveTab] = useState<'preview' | 'code'>('preview')
-  const [copied, setCopied] = useState(false)
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
       <div className="flex items-center justify-between border-b px-4">
         <div className="flex gap-4">
           <button
-            onClick={() => setActiveTab('preview')}
+            onClick={() => setActiveTab("preview")}
             className={`py-3 ${
-              activeTab === 'preview'
-                ? 'border-b-2 border-primary font-semibold'
-                : 'text-muted-foreground'
+              activeTab === "preview"
+                ? "border-b-2 border-primary font-semibold"
+                : "text-muted-foreground"
             }`}
           >
             Preview
           </button>
           <button
-            onClick={() => setActiveTab('code')}
+            onClick={() => setActiveTab("code")}
             className={`py-3 ${
-              activeTab === 'code'
-                ? 'border-b-2 border-primary font-semibold'
-                : 'text-muted-foreground'
+              activeTab === "code"
+                ? "border-b-2 border-primary font-semibold"
+                : "text-muted-foreground"
             }`}
           >
             Code
@@ -47,7 +47,7 @@ export const CodePreview: React.FC<CodePreviewProps> = ({ code, preview }) => {
         </div>
       </div>
       <div className="p-6">
-        {activeTab === 'preview' ? (
+        {activeTab === "preview" ? (
           preview
         ) : (
           <div className="relative">
@@ -63,23 +63,28 @@ export const CodePreview: React.FC<CodePreviewProps> = ({ code, preview }) => {
                 <Copy className="h-4 w-4" />
               )}
             </Button>
-            <Highlight  theme={themes.dracula}  code={code} language="tsx">
-                {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                  <pre className={`${className} text-sm`} style={{ ...style, padding: '16px' }}>
-                    {tokens.map((line, i) => (
-                      <div {...getLineProps({ line, key: i })}>
-                        {line.map((token, key) => (
-                          <span {...getTokenProps({ token, key })} />
-                        ))}
-                      </div>
-                    ))}
-                  </pre>
-                )}
-              </Highlight>
-          
+            <Highlight theme={themes.dracula} code={code} language="tsx">
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre
+                  className={`${className} text-sm`}
+                  style={{ ...style, padding: "16px" }}
+                >
+                  {tokens.map((line, i) => (
+                    <div key={`line-${i}`} {...getLineProps({ line, key: i })}>
+                      {line.map((token, key) => (
+                        <span
+                          key={`token-${key}`}
+                          {...getTokenProps({ token, key })}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </pre>
+              )}
+            </Highlight>
           </div>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
