@@ -1,13 +1,19 @@
+'use client'
 import { AppSidebar } from "@/components/app-sidebar";
 import { Navbar } from "@/components/navbar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import "../globals.css";
+import { MetadataProvider, useMetadata } from "@/context/MetadataContext";
 
-export const metadata = {
-  title: "shadcn-ui/addons",
-  description:
-    "Enhance your UI with powerful addons for shadcn-ui, designed to extend functionality and streamline your development workflow.",
-};
+function MetadataUpdater() {
+  const { title, description } = useMetadata();
+  return (
+    <head>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+    </head>
+  );
+}
 
 export default function LayoutWithSidebar({
   children,
@@ -15,17 +21,20 @@ export default function LayoutWithSidebar({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <SidebarProvider>
-        <Navbar />
-        <div className="flex flex-1">
-          <AppSidebar />
-          <main className="flex-1 overflow-auto">
-            <SidebarTrigger className="fixed mb-4" />
-            {children}
-          </main>
-        </div>
-      </SidebarProvider>
-    </div>
+    <MetadataProvider>
+      <MetadataUpdater />
+      <div className="flex flex-col min-h-screen">
+        <SidebarProvider>
+          <Navbar />
+          <div className="flex flex-1">
+            <AppSidebar />
+            <main className="flex-1 overflow-auto">
+              <SidebarTrigger className="fixed mb-4" />
+              {children}
+            </main>
+          </div>
+        </SidebarProvider>
+      </div>
+    </MetadataProvider>
   );
 }

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Metadata } from 'next';
-import { PageLayout } from '@/components/ui/PageLayout';
-import { Badge } from '@/components/ui/badge';
-import { Section } from '@/components/ui/Section';
-import { Card } from '@/components/Card';
-import { CodePreview } from '@/components/CodePreview';
-import { InstallationGuide } from '@/components/docs/InstallationGuide';
+import React, { useEffect } from "react";
+import { PageLayout } from "@/components/ui/PageLayout";
+import { Badge } from "@/components/ui/badge";
+import { Section } from "@/components/ui/Section";
+import { Card } from "@/components/Card";
+import { CodePreview } from "@/components/CodePreview";
+import { InstallationGuide } from "@/components/docs/InstallationGuide";
+import { useMetadata } from "@/context/MetadataContext";
 
 interface UsageExample {
   title: string;
@@ -34,9 +34,14 @@ export const ReusablePage: React.FC<ReusablePageProps> = ({
   installationCode,
   examples,
 }) => {
+  const { setMetadata } = useMetadata();
+
+  useEffect(() => {
+    setMetadata(title, description);
+  }, [title, description, setMetadata]);
+
   return (
     <PageLayout>
-      {/* Header */}
       <div className="flex flex-col md:flex-row items-center gap-4 mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-center md:text-left">
           {title}
@@ -48,15 +53,12 @@ export const ReusablePage: React.FC<ReusablePageProps> = ({
         {description}
       </p>
 
-      {/* Demo Section */}
       <CodePreview code={demoCode} preview={demoPreview} />
 
-      {/* Installation Section */}
       <Section title="Installation">
         <InstallationGuide componentName={title} componentCode={installationCode} />
       </Section>
 
-      {/* Usage Examples */}
       <Section title="Usage Examples">
         <div className="grid gap-8">
           {examples.map((example, index) => (
