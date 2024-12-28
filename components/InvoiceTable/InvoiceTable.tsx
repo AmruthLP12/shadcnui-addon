@@ -9,6 +9,10 @@ import { cn } from "@/lib/utils"
 
 const noArrows = "appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
 
+const preventWheelChange = (e: React.WheelEvent<HTMLInputElement>) => {
+  e.currentTarget.blur();
+};
+
 interface TableItem {
   id: number;
   description: string;
@@ -116,6 +120,7 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({
                   value={item.quantity === 0 ? '' : item.quantity}
                   onChange={(e) => handleItemChange(item.id, 'quantity', e.target.value)}
                   className={cn("w-full", noArrows)}
+                  onWheel={preventWheelChange}
                 />
               </TableCell>
               <TableCell>
@@ -124,6 +129,7 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({
                   value={item.price === 0 ? '' : item.price}
                   onChange={(e) => handleItemChange(item.id, 'price', e.target.value)}
                   className={cn("w-full", noArrows)}
+                  onWheel={preventWheelChange}
                 />
               </TableCell>
               <TableCell>
@@ -168,6 +174,7 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({
                   handleFooterChange('advancePayment', e.target.value)
                 }
                 className={cn("w-28", noArrows)}
+                onWheel={preventWheelChange}
               />
             ) : (
               <span className="font-bold">{footer.advancePayment}</span>
