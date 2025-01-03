@@ -1,91 +1,97 @@
-import { BackgroundOverlayCardExample } from "@/app/Examples/Examples";
-import { BackgroundOverlayCard } from "@/components/Cards/BackgroundOverlayCard";
+"use client";
+import BackgroundOverlayCardDemo from "@/components/BackgroundOverlayCard/BackgroundOverlayCardDemo";
+import DarkMode from "@/components/BackgroundOverlayCard/DarkMode";
+import FullWidthCard from "@/components/BackgroundOverlayCard/FullWidthCard";
+import GalleryCard from "@/components/BackgroundOverlayCard/GalleryCard";
+import HoverEffectExample from "@/components/BackgroundOverlayCard/HoverEffectExample";
+import MinimalStyle from "@/components/BackgroundOverlayCard/MinimalStyle";
 import { ReusablePage } from "@/components/ReusablePage";
+import { useEffect, useState } from "react";
 
-const componentCode = `"use client";
+export default function CardDemo() {
+  const [componentCode, setComponentCode] = useState("Loading...");
+  const [demoCode, setDemoCode] = useState("Loading...");
+  const [hoverEffect, setHoverEffect] = useState("Loading...");
+  const [fullWidth, setFullWidth] = useState("Loading...");
+  const [galleryCard, setGalleryCard] = useState("Loading...");
+  const [minimalStyle, setMinimalStyle] = useState("Loading...");
+  const [darkMode, setDarkMode] = useState("Loading...");
 
-import { cn } from "@/lib/utils";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+  useEffect(() => {
+    const fetchCode = async (
+      path: string,
+      setter: React.Dispatch<React.SetStateAction<string>>
+    ) => {
+      try {
+        const response = await fetch(`/api/component-code?path=${path}`);
+        const code = await response.text();
+        setter(code);
+      } catch (err) {
+        console.error(`Failed to load code from ${path}:`, err);
+        setter("Failed to load code.");
+      }
+    };
 
-interface BackgroundOverlayCardProps {
-  title: string;
-  description: string;
-  defaultBackground: string;
-  hoverBackground: string;
-  className?: string;
-}
+    Promise.all([
+      fetchCode(
+        "components/BackgroundOverlayCard/BackgroundOverlayCard.tsx",
+        setComponentCode
+      ),
+      fetchCode(
+        "components/BackgroundOverlayCard/BackgroundOverlayCardDemo.tsx",
+        setDemoCode
+      ),
+      fetchCode(
+        "components/BackgroundOverlayCard/HoverEffectExample.tsx",
+        setHoverEffect
+      ),
+      fetchCode(
+        "components/BackgroundOverlayCard/FullWidthCard.tsx",
+        setFullWidth
+      ),
+      fetchCode(
+        "components/BackgroundOverlayCard/GalleryCard.tsx",
+        setGalleryCard
+      ),
+      fetchCode(
+        "components/BackgroundOverlayCard/MinimalStyle.tsx",
+        setMinimalStyle
+      ),
+      fetchCode(
+        "components/BackgroundOverlayCard/MinimalStyle.tsx",
+        setDarkMode
+      ),
+    ]);
+  }, []);
 
-export function BackgroundOverlayCard({
-  title,
-  description,
-  defaultBackground,
-  hoverBackground,
-  className,
-}: BackgroundOverlayCardProps) {
-  return (
-    <div
-      className={cn(
-        "group relative max-w-xs w-full h-96 mx-auto overflow-hidden rounded-md shadow-xl border border-transparent dark:border-neutral-800",
-        className
-      )}
-    >
-      {/* Background Layer (Default) */}
-      <div
-        style={{
-          backgroundImage: \`url(\${defaultBackground})\`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-        className="absolute inset-0 transition-all duration-500"
-      />
+  const examples = [
+    {
+      title: "Hover Effect Example",
+      code: hoverEffect,
+      preview: <HoverEffectExample />,
+    },
+    {
+      title: "Full-Width Card",
+      code: fullWidth,
+      preview: <FullWidthCard />,
+    },
+    {
+      title: "Gallery Card",
+      code: galleryCard,
+      preview: <GalleryCard />,
+    },
+    {
+      title: "Minimal Style",
+      code: minimalStyle,
+      preview: <MinimalStyle />,
+    },
+    {
+      title: "Dark Mode",
+      code: darkMode,
+      preview: <DarkMode />,
+    },
+  ];
 
-      {/* Hover Background */}
-      <div
-        style={{
-          backgroundImage: \`url(\${hoverBackground})\`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-        className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-      />
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black opacity-50 group-hover:opacity-60 transition-opacity duration-500" />
-
-      {/* Card Content */}
-      <Card className="relative z-10 bg-transparent p-4 h-full">
-        <CardHeader>
-          <CardTitle className="text-xl md:text-3xl font-bold text-white">{title}</CardTitle>
-          <CardDescription className="text-base text-gray-300 my-4">{description}</CardDescription>
-        </CardHeader>
-      </Card>
-    </div>
-  );
-}
-`;
-
-const demoCode = `import { BackgroundOverlayCard } from "@/components/Cards/BackgroundOverlayCard";
-
-const BackgroundOverlayCardDemo = () => {
-  return (
-    <div className="w-full px-10">
-      <BackgroundOverlayCard
-        title="Dynamic Background Card"
-        description="Hover over this card to see the background change!"
-        defaultBackground="https://tinyurl.com/47n2srhd"
-        hoverBackground="https://tinyurl.com/3r62nt4v"
-        className="max-w-md cursor-pointer"
-      />
-    </div>
-  );
-};
-
-export default BackgroundOverlayCardDemo;
-`;
-
-const examples = BackgroundOverlayCardExample
-
-export default function Demo() {
   return (
     <div className="container mx-auto p-6 space-y-8">
       <ReusablePage
@@ -93,15 +99,7 @@ export default function Demo() {
         description="A reusable card component with dynamic background transitions on hover."
         badgeText="UI Component"
         demoCode={demoCode}
-        demoPreview={
-          <BackgroundOverlayCard
-            title="Dynamic Background Card"
-            description="Hover over this card to see the background change!"
-            defaultBackground="https://tinyurl.com/47n2srhd"
-            hoverBackground="https://tinyurl.com/3r62nt4v"
-            className="max-w-md cursor-pointer"
-          />
-        }
+        demoPreview={<BackgroundOverlayCardDemo />}
         installationCode={componentCode}
         examples={examples}
       />

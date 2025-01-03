@@ -1,4 +1,4 @@
-import { BackgroundOverlayCard } from "@/components/Cards/BackgroundOverlayCard";
+import { BackgroundOverlayCard } from "@/components/BackgroundOverlayCard/BackgroundOverlayCard";
 import { AdvancedInvoiceTable } from "@/components/InvoiceTable/AdvancedInvoiceTable";
 import { BasicInvoiceTable } from "@/components/InvoiceTable/BasicInvoiceTable";
 
