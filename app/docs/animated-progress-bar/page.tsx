@@ -1,49 +1,65 @@
 "use client";
 
-import { AnimatedProgressBarExamples } from "@/app/Examples/Examples";
+import React, { useEffect, useState } from "react";
 import AnimatedProgressBarDemo from "@/components/AnimatedProgressBar/AnimatedProgressBarDemo";
 import { ReusablePage } from "@/components/ReusablePage";
-import { useEffect, useState } from "react";
-
-
-
-
-const examples = AnimatedProgressBarExamples;
+import ProgressBarWithControls from "@/components/AnimatedProgressBar/ProgressBarWithControls";
+import { CustomColorsExample } from "@/components/AnimatedProgressBar/CustomColorsExample";
+import { WithoutAnimationExample } from "@/components/AnimatedProgressBar/WithoutAnimationExample";
 
 export default function AnimatedProgressPage() {
-
-
-  const [componentCode, setComponentCode] = useState('');
-  const [demoCode, setDemoCode] = useState('');
+  const [componentCode, setComponentCode] = useState("Loading...");
+  const [demoCode, setDemoCode] = useState("Loading...");
+  const [WithControls, setWithControls] = useState("Loading...");
+  const [CustomColors, setCustomColors] = useState("Loading...");
+  const [WithoutAnimation, setWithoutAnimation] = useState("Loading...");
 
   useEffect(() => {
-    // Dynamically import the AnimatedProgressBar component code
-    fetch('/api/component-code?path=components/AnimatedProgressBar/AnimatedProgressBar.tsx')
-      .then(response => response.text())
-      .then(code => setComponentCode(code))
-      .catch((err) => console.error('Failed to load AnimatedProgressBar code:', err));
+    const fetchCode = async (path: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
+      try {
+        const response = await fetch(`/api/component-code?path=${path}`);
+        const code = await response.text();
+        setter(code);
+      } catch (err) {
+        console.error(`Failed to load code from ${path}:`, err);
+        setter("Failed to load code.");
+      }
+    };
+
+    Promise.all([
+      fetchCode("components/AnimatedProgressBar/AnimatedProgressBar.tsx", setComponentCode),
+      fetchCode("components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx", setDemoCode),
+      fetchCode("components/AnimatedProgressBar/ProgressBarWithControls.tsx", setWithControls),
+      fetchCode("components/AnimatedProgressBar/CustomColorsExample.tsx", setCustomColors),
+      fetchCode("components/AnimatedProgressBar/WithoutAnimationExample.tsx", setWithoutAnimation),
+    ]);
   }, []);
 
-  useEffect(() => {
-    // Dynamically import the AnimatedProgressBarDemo component code
-    fetch('/api/component-code?path=components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx')
-      .then(response => response.text())
-      .then(code => setDemoCode(code))
-      .catch((err) => console.error('Failed to load AnimatedProgressBarDemo code:', err));
-  },
-  []);
+  const examples = [
+    {
+      title: "ProgressBar With Controls",
+      code: WithControls,
+      preview: <ProgressBarWithControls />,
+    },
+    {
+      title: "Custom Colors",
+      code: CustomColors,
+      preview: <CustomColorsExample />,
+    },
+    {
+      title: "Without Animation",
+      code: WithoutAnimation,
+      preview: <WithoutAnimationExample />,
+    },
+  ];
 
-  
   return (
     <ReusablePage
       title="Animated Progress Bar"
       description="A customizable progress bar component with smooth animations and interactive controls."
       badgeText="UI Component"
       demoCode={demoCode}
-      demoPreview={
-        <AnimatedProgressBarDemo
-        />
-      }
+      demoPreview={<AnimatedProgressBarDemo />}
       installationCode={componentCode}
       examples={examples}
     />
