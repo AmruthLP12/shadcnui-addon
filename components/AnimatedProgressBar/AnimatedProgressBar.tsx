@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 interface AnimatedProgressBarProps {
   percent: number;
@@ -17,7 +17,7 @@ export const AnimatedProgressBar: React.FC<AnimatedProgressBarProps> = ({
   barColor,
   backgroundColor,
   height,
-  animated
+  animated,
 }) => {
   const [progress, setProgress] = useState(0);
 
@@ -33,22 +33,21 @@ export const AnimatedProgressBar: React.FC<AnimatedProgressBarProps> = ({
   }, [percent, animated]);
 
   return (
-    <div 
+    <div
       className="w-full rounded-full overflow-hidden"
-      style={{ 
+      style={{
         backgroundColor: backgroundColor,
-        height: `${height}px`
+        height: `${height}px`,
       }}
     >
-      <div 
+      <div
         className="h-full rounded-full"
         style={{
           width: `${progress}%`,
           backgroundColor: barColor,
-          transition: animated ? `width ${duration}ms ease-in-out` : 'none'
+          transition: animated ? `width ${duration}ms ease-in-out` : "none",
         }}
       />
     </div>
   );
 };
-
