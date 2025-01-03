@@ -10,9 +10,9 @@ import { WithoutAnimationExample } from "@/components/AnimatedProgressBar/Withou
 export default function AnimatedProgressPage() {
   const [componentCode, setComponentCode] = useState("Loading...");
   const [demoCode, setDemoCode] = useState("Loading...");
-  const [WithControls, setWithControls] = useState("Loading...");
-  const [CustomColors, setCustomColors] = useState("Loading...");
-  const [WithoutAnimation, setWithoutAnimation] = useState("Loading...");
+  const [withControls, setWithControls] = useState("Loading...");
+  const [customColors, setCustomColors] = useState("Loading...");
+  const [withoutAnimation, setWithoutAnimation] = useState("Loading...");
 
   useEffect(() => {
     const fetchCode = async (path: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
@@ -38,17 +38,17 @@ export default function AnimatedProgressPage() {
   const examples = [
     {
       title: "ProgressBar With Controls",
-      code: WithControls,
+      code: withControls,
       preview: <ProgressBarWithControls />,
     },
     {
       title: "Custom Colors",
-      code: CustomColors,
+      code: customColors,
       preview: <CustomColorsExample />,
     },
     {
       title: "Without Animation",
-      code: WithoutAnimation,
+      code: withoutAnimation,
       preview: <WithoutAnimationExample />,
     },
   ];
