@@ -1,10 +1,10 @@
 "use client";
-import BackgroundOverlayCardDemo from "@/components/BackgroundOverlayCard/BackgroundOverlayCardDemo";
-import DarkMode from "@/components/BackgroundOverlayCard/DarkMode";
-import FullWidthCard from "@/components/BackgroundOverlayCard/FullWidthCard";
-import GalleryCard from "@/components/BackgroundOverlayCard/GalleryCard";
-import HoverEffectExample from "@/components/BackgroundOverlayCard/HoverEffectExample";
-import MinimalStyle from "@/components/BackgroundOverlayCard/MinimalStyle";
+import BackgroundOverlayCardDemo from "@/app/components/BackgroundOverlayCard/BackgroundOverlayCardDemo";
+import DarkMode from "@/app/components/BackgroundOverlayCard/DarkMode";
+import FullWidthCard from "@/app/components/BackgroundOverlayCard/FullWidthCard";
+import GalleryCard from "@/app/components/BackgroundOverlayCard/GalleryCard";
+import HoverEffectExample from "@/app/components/BackgroundOverlayCard/HoverEffectExample";
+import MinimalStyle from "@/app/components/BackgroundOverlayCard/MinimalStyle";
 import { ReusablePage } from "@/components/ReusablePage";
 import { useEffect, useState } from "react";
 
@@ -19,49 +19,31 @@ export default function CardDemo() {
 
   useEffect(() => {
     const fetchCode = async (
-      path: string,
+      component: string,
       setter: React.Dispatch<React.SetStateAction<string>>
     ) => {
       try {
-        const response = await fetch(`/api/component-code?path=${path}`);
+        const response = await fetch(
+          `/api/component-code?component=${encodeURIComponent(component)}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const code = await response.text();
         setter(code);
       } catch (err) {
-        console.error(`Failed to load code from ${path}:`, err);
-        setter("Failed to load code.");
+        console.error(`Failed to load code for ${component}:`, err);
+        setter(`Failed to load code: ${err}`);
       }
     };
 
-    Promise.all([
-      fetchCode(
-        "components/BackgroundOverlayCard/BackgroundOverlayCard.tsx",
-        setComponentCode
-      ),
-      fetchCode(
-        "components/BackgroundOverlayCard/BackgroundOverlayCardDemo.tsx",
-        setDemoCode
-      ),
-      fetchCode(
-        "components/BackgroundOverlayCard/HoverEffectExample.tsx",
-        setHoverEffect
-      ),
-      fetchCode(
-        "components/BackgroundOverlayCard/FullWidthCard.tsx",
-        setFullWidth
-      ),
-      fetchCode(
-        "components/BackgroundOverlayCard/GalleryCard.tsx",
-        setGalleryCard
-      ),
-      fetchCode(
-        "components/BackgroundOverlayCard/MinimalStyle.tsx",
-        setMinimalStyle
-      ),
-      fetchCode(
-        "components/BackgroundOverlayCard/MinimalStyle.tsx",
-        setDarkMode
-      ),
-    ]);
+    fetchCode("BackgroundOverlayCard", setComponentCode);
+    fetchCode("BackgroundOverlayCardDemo", setDemoCode);
+    fetchCode("HoverEffectExample", setHoverEffect);
+    fetchCode("FullWidthCard", setFullWidth);
+    fetchCode("GalleryCard", setGalleryCard);
+    fetchCode("MinimalStyle", setMinimalStyle);
+    fetchCode("DarkMode", setDarkMode);
   }, []);
 
   const examples = [

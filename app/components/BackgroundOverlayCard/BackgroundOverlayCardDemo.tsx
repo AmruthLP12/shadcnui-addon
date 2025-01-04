@@ -1,4 +1,4 @@
-import { BackgroundOverlayCard } from "@/components/BackgroundOverlayCard/BackgroundOverlayCard";
+import { BackgroundOverlayCard } from "@/app/components/BackgroundOverlayCard/BackgroundOverlayCard";
 
 const BackgroundOverlayCardDemo = () => {
   return (

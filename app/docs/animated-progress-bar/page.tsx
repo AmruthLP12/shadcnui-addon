@@ -7,6 +7,8 @@ import ProgressBarWithControls from "@/app/components/AnimatedProgressBar/Progre
 import { CustomColorsExample } from "@/app/components/AnimatedProgressBar/CustomColorsExample";
 import { WithoutAnimationExample } from "@/app/components/AnimatedProgressBar/WithoutAnimationExample";
 
+
+
 export default function AnimatedProgressPage() {
   const [componentCode, setComponentCode] = useState("Loading...");
   const [demoCode, setDemoCode] = useState("Loading...");
@@ -15,7 +17,7 @@ export default function AnimatedProgressPage() {
   const [withoutAnimation, setWithoutAnimation] = useState("Loading...");
 
   useEffect(() => {
-    const fetchCode = async (component: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
+    const fetchCode = async ( component: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
       try {
         const response = await fetch(`/api/component-code?component=${encodeURIComponent(component)}`);
         if (!response.ok) {

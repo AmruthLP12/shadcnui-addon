@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BackgroundOverlayCard } from "@/components/BackgroundOverlayCard/BackgroundOverlayCard";
+import { BackgroundOverlayCard } from "@/app/components/BackgroundOverlayCard/BackgroundOverlayCard";
 
 const HoverEffectExample = () => {
   const defaultBackground = "https://tinyurl.com/47n2srhd";

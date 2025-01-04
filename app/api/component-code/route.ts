@@ -6,11 +6,21 @@ export const runtime = 'nodejs';
 
 // Map component names to their file paths
 const componentMap: { [key: string]: string } = {
+  // ? AnimatedProgressBar
   'AnimatedProgressBar': 'app/components/AnimatedProgressBar/AnimatedProgressBar.tsx',
   'AnimatedProgressBarDemo': 'app/components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx',
   'ProgressBarWithControls': 'app/components/AnimatedProgressBar/ProgressBarWithControls.tsx',
   'CustomColorsExample': 'app/components/AnimatedProgressBar/CustomColorsExample.tsx',
   'WithoutAnimationExample': 'app/components/AnimatedProgressBar/WithoutAnimationExample.tsx',
+
+  // ? BackgroundOverlayCard
+  'BackgroundOverlayCard': "app/components/BackgroundOverlayCard/BackgroundOverlayCard.tsx",
+  'BackgroundOverlayCardDemo': "app/components/BackgroundOverlayCard/BackgroundOverlayCardDemo.tsx",
+  'HoverEffectExample': "app/components/BackgroundOverlayCard/HoverEffectExample.tsx",
+  'FullWidthCard': "app/components/BackgroundOverlayCard/FullWidthCard.tsx",
+  'GalleryCard': "app/components/BackgroundOverlayCard/GalleryCard.tsx",
+  'MinimalStyle': "app/components/BackgroundOverlayCard/MinimalStyle.tsx",
+  'DarkMode': "app/components/BackgroundOverlayCard/DarkMode.tsx",
 };
 
 export async function GET(request: NextRequest) {
