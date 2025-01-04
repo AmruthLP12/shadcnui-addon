@@ -29,13 +29,11 @@ export default function AnimatedProgressPage() {
       }
     };
 
-    Promise.all([
-      fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBar.tsx", setComponentCode),
-      fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx", setDemoCode),
-      fetchCode("app/components/AnimatedProgressBar/ProgressBarWithControls.tsx", setWithControls),
-      fetchCode("app/components/AnimatedProgressBar/CustomColorsExample.tsx", setCustomColors),
-      fetchCode("app/components/AnimatedProgressBar/WithoutAnimationExample.tsx", setWithoutAnimation),
-    ]);
+    fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBar.tsx", setComponentCode);
+    fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx", setDemoCode);
+    fetchCode("app/components/AnimatedProgressBar/ProgressBarWithControls.tsx", setWithControls);
+    fetchCode("app/components/AnimatedProgressBar/CustomColorsExample.tsx", setCustomColors);
+    fetchCode("app/components/AnimatedProgressBar/WithoutAnimationExample.tsx", setWithoutAnimation);
   }, []);
 
   const examples = [

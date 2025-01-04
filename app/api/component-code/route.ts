@@ -1,28 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { fetchComponentCode } from '@/utils/fetch-component-code';
 
 export const runtime = 'nodejs'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const filePath = searchParams.get('path');
+  const path = searchParams.get('path');
 
-  if (!filePath) {
+  if (!path) {
     return NextResponse.json({ error: 'No file path provided' }, { status: 400 });
   }
 
-  const fullPath = path.join(process.cwd(), filePath);
-
   try {
-    const fileContents = await fs.readFile(fullPath, 'utf8');
-    return new NextResponse(fileContents, {
+    const code = await fetchComponentCode(path);
+    return new NextResponse(code, {
       headers: { 'Content-Type': 'text/plain' },
     });
   } catch (error) {
-    console.error('Error reading file:', error);
-    // Return the error message for debugging
-    return NextResponse.json({ error: `Failed to read file: ${error}` }, { status: 500 });
+    console.error('Error fetching component code:', error);
+    return NextResponse.json({ error: `Failed to fetch component code: ${error}` }, { status: 500 });
   }
 }
 
