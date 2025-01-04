@@ -15,25 +15,25 @@ export default function AnimatedProgressPage() {
   const [withoutAnimation, setWithoutAnimation] = useState("Loading...");
 
   useEffect(() => {
-    const fetchCode = async (path: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
+    const fetchCode = async (component: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
       try {
-        const response = await fetch(`/api/component-code?path=${encodeURIComponent(path)}`);
+        const response = await fetch(`/api/component-code?component=${encodeURIComponent(component)}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const code = await response.text();
         setter(code);
       } catch (err) {
-        console.error(`Failed to load code from ${path}:`, err);
+        console.error(`Failed to load code for ${component}:`, err);
         setter(`Failed to load code: ${err}`);
       }
     };
 
-    fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBar.tsx", setComponentCode);
-    fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx", setDemoCode);
-    fetchCode("app/components/AnimatedProgressBar/ProgressBarWithControls.tsx", setWithControls);
-    fetchCode("app/components/AnimatedProgressBar/CustomColorsExample.tsx", setCustomColors);
-    fetchCode("app/components/AnimatedProgressBar/WithoutAnimationExample.tsx", setWithoutAnimation);
+    fetchCode('AnimatedProgressBar', setComponentCode);
+    fetchCode('AnimatedProgressBarDemo', setDemoCode);
+    fetchCode('ProgressBarWithControls', setWithControls);
+    fetchCode('CustomColorsExample', setCustomColors);
+    fetchCode('WithoutAnimationExample', setWithoutAnimation);
   }, []);
 
   const examples = [
