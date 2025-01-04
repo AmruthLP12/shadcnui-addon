@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { InvoiceTable } from '@/components/InvoiceTable/InvoiceTable';
+import { InvoiceTable } from '@/app/components/InvoiceTable/InvoiceTable';
 
 export const AdvancedInvoiceTable: React.FC = () => {
   const [footerDetails, setFooterDetails] = useState({

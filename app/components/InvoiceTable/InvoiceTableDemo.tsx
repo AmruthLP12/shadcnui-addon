@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { BasicInvoiceTable } from '@/components/InvoiceTable/BasicInvoiceTable';
-import { AdvancedInvoiceTable } from '@/components/InvoiceTable/AdvancedInvoiceTable';
+import { BasicInvoiceTable } from '@/app/components/InvoiceTable/BasicInvoiceTable';
+import { AdvancedInvoiceTable } from '@/app/components/InvoiceTable/AdvancedInvoiceTable';
 
 export default function InvoiceTableDemo() {
   return (

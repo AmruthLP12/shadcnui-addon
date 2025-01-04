@@ -21,6 +21,12 @@ const componentMap: { [key: string]: string } = {
   'GalleryCard': "app/components/BackgroundOverlayCard/GalleryCard.tsx",
   'MinimalStyle': "app/components/BackgroundOverlayCard/MinimalStyle.tsx",
   'DarkMode': "app/components/BackgroundOverlayCard/DarkMode.tsx",
+
+  // ? InvoiceTable
+  'InvoiceTable': "app/components/InvoiceTable/InvoiceTable.tsx",
+  'InvoiceTableDemo': "app/components/InvoiceTable/InvoiceTableDemo.tsx",
+  'BasicInvoiceTable': "app/components/InvoiceTable/BasicInvoiceTable.tsx",
+  'AdvancedInvoiceTable': "app/components/InvoiceTable/AdvancedInvoiceTable.tsx",
 };
 
 export async function GET(request: NextRequest) {

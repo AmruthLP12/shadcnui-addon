@@ -1,7 +1,7 @@
 "use client";
 
-import { AdvancedInvoiceTable } from "@/components/InvoiceTable/AdvancedInvoiceTable";
-import { BasicInvoiceTable } from "@/components/InvoiceTable/BasicInvoiceTable";
+import { AdvancedInvoiceTable } from "@/app/components/InvoiceTable/AdvancedInvoiceTable";
+import { BasicInvoiceTable } from "@/app/components/InvoiceTable/BasicInvoiceTable";
 import { ReusablePage } from "@/components/ReusablePage";
 import { useEffect, useState } from "react";
 
@@ -13,34 +13,28 @@ export default function InvoicePage() {
 
   useEffect(() => {
     const fetchCode = async (
-      path: string,
+      component: string,
       setter: React.Dispatch<React.SetStateAction<string>>
     ) => {
       try {
-        const response = await fetch(`/api/component-code?path=${path}`);
+        const response = await fetch(
+          `/api/component-code?component=${encodeURIComponent(component)}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const code = await response.text();
         setter(code);
       } catch (err) {
-        console.error(`Failed to load code from ${path}:`, err);
-        setter("Failed to load code.");
+        console.error(`Failed to load code for ${component}:`, err);
+        setter(`Failed to load code: ${err}`);
       }
     };
 
-    Promise.all([
-      fetchCode("components/InvoiceTable/InvoiceTable.tsx", setComponentCode),
-      fetchCode(
-        "components/InvoiceTable/AdvancedInvoiceTable.tsx",
-        setDemoCode
-      ),
-      fetchCode(
-        "components/InvoiceTable/BasicInvoiceTable.tsx",
-        setBasicInvoice
-      ),
-      fetchCode(
-        "components/InvoiceTable/BasicInvoiceTable.tsx",
-        setAdvancedInvoice
-      ),
-    ]);
+    fetchCode("InvoiceTable", setComponentCode);
+    fetchCode("InvoiceTableDemo", setDemoCode);
+    fetchCode("BasicInvoiceTable", setBasicInvoice);
+    fetchCode("AdvancedInvoiceTable", setAdvancedInvoice);
   }, []);
 
   const examples = [

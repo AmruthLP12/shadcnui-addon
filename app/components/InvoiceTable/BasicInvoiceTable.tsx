@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { InvoiceTable } from '@/components/InvoiceTable/InvoiceTable';
+import { InvoiceTable } from '@/app/components/InvoiceTable/InvoiceTable';
 
 export const BasicInvoiceTable: React.FC = () => {
   const initialItems = [
