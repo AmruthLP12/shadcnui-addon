@@ -4,6 +4,7 @@ import path from 'path';
 
 export const runtime = 'nodejs';
 
+// Map component names to their file paths
 const componentMap: { [key: string]: string } = {
   'AnimatedProgressBar': 'app/components/AnimatedProgressBar/AnimatedProgressBar.tsx',
   'AnimatedProgressBarDemo': 'app/components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx',
@@ -20,27 +21,20 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid component name' }, { status: 400 });
   }
 
-  const filePath = componentMap[component];
+  const relativeFilePath = componentMap[component];
 
   try {
-    let code: string;
-    const fullPath = path.join(process.cwd(), filePath);
+    const buildPath = path.join(process.cwd(), '.next', 'server', relativeFilePath);
+    const devPath = path.join(process.cwd(), relativeFilePath);
 
-    if (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') {
-      // Local development or Vercel preview: Read from file system
-      code = await fs.readFile(fullPath, 'utf-8');
-    } else {
-      // Production: Read from a pre-built file
-      const buildPath = path.join(process.cwd(), '.next', 'server', 'app', filePath);
-      code = await fs.readFile(buildPath, 'utf-8');
-    }
+    // Check environment and read appropriate path
+    const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview';
+    const fullPath = isDev ? devPath : buildPath;
 
-    return new NextResponse(code, {
-      headers: { 'Content-Type': 'text/plain' },
-    });
+    const code = await fs.readFile(fullPath, 'utf-8');
+    return new NextResponse(code, { headers: { 'Content-Type': 'text/plain' } });
   } catch (error) {
     console.error('Error fetching component code:', error);
     return NextResponse.json({ error: 'Failed to fetch component code' }, { status: 500 });
   }
 }
-
