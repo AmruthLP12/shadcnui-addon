@@ -1,9 +1,10 @@
-'use client'
+"use client";
+
 import React, { useState } from "react";
-import { AnimatedProgressBar } from "@/components/AnimatedProgressBar/AnimatedProgressBar";
+import { AnimatedProgressBar } from "@/app/components/AnimatedProgressBar/AnimatedProgressBar";
 import { Button } from "@/components/ui/button";
 
-const ProgressBarWithControls = () => {
+export const WithControlsExample = () => {
   const [progress, setProgress] = useState(0);
 
   return (
@@ -16,11 +17,8 @@ const ProgressBarWithControls = () => {
         height={20}
         animated={true}
       />
-      <div className="flex flex-wrap space-x-2">
-        <Button
-          onClick={() => setProgress(Math.max(0, progress - 20))}
-          variant={'destructive'}
-        >
+      <div className="flex space-x-2">
+        <Button onClick={() => setProgress(Math.max(0, progress - 20))} variant="destructive">
           Decrease
         </Button>
         <Button onClick={() => setProgress(Math.min(100, progress + 20))}>
@@ -30,5 +28,3 @@ const ProgressBarWithControls = () => {
     </div>
   );
 };
-
-export default ProgressBarWithControls;

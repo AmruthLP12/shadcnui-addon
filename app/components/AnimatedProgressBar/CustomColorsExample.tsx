@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AnimatedProgressBar } from "@/components/AnimatedProgressBar/AnimatedProgressBar";
+import { AnimatedProgressBar } from "@/app/components/AnimatedProgressBar/AnimatedProgressBar";
 
 export const CustomColorsExample = () => {
   return (

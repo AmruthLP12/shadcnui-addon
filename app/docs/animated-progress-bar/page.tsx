@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import AnimatedProgressBarDemo from "@/components/AnimatedProgressBar/AnimatedProgressBarDemo";
+import AnimatedProgressBarDemo from "@/app/components/AnimatedProgressBar/AnimatedProgressBarDemo";
 import { ReusablePage } from "@/components/ReusablePage";
-import ProgressBarWithControls from "@/components/AnimatedProgressBar/ProgressBarWithControls";
-import { CustomColorsExample } from "@/components/AnimatedProgressBar/CustomColorsExample";
-import { WithoutAnimationExample } from "@/components/AnimatedProgressBar/WithoutAnimationExample";
+import ProgressBarWithControls from "@/app/components/AnimatedProgressBar/ProgressBarWithControls";
+import { CustomColorsExample } from "@/app/components/AnimatedProgressBar/CustomColorsExample";
+import { WithoutAnimationExample } from "@/app/components/AnimatedProgressBar/WithoutAnimationExample";
 
 export default function AnimatedProgressPage() {
   const [componentCode, setComponentCode] = useState("Loading...");
@@ -27,11 +27,11 @@ export default function AnimatedProgressPage() {
     };
 
     Promise.all([
-      fetchCode("components/AnimatedProgressBar/AnimatedProgressBar.tsx", setComponentCode),
-      fetchCode("components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx", setDemoCode),
-      fetchCode("components/AnimatedProgressBar/ProgressBarWithControls.tsx", setWithControls),
-      fetchCode("components/AnimatedProgressBar/CustomColorsExample.tsx", setCustomColors),
-      fetchCode("components/AnimatedProgressBar/WithoutAnimationExample.tsx", setWithoutAnimation),
+      fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBar.tsx", setComponentCode),
+      fetchCode("app/components/AnimatedProgressBar/AnimatedProgressBarDemo.tsx", setDemoCode),
+      fetchCode("app/components/AnimatedProgressBar/ProgressBarWithControls.tsx", setWithControls),
+      fetchCode("app/components/AnimatedProgressBar/CustomColorsExample.tsx", setCustomColors),
+      fetchCode("app/components/AnimatedProgressBar/WithoutAnimationExample.tsx", setWithoutAnimation),
     ]);
   }, []);
 
