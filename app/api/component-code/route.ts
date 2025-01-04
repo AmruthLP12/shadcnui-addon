@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 
-export const runtime = 'nodejs' // Add this line to use the Node.js runtime
+export const runtime = 'nodejs'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -21,7 +21,8 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error reading file:', error);
-    return NextResponse.json({ error: 'Failed to read file' }, { status: 500 });
+    // Return the error message for debugging
+    return NextResponse.json({ error: `Failed to read file: ${error}` }, { status: 500 });
   }
 }
 
