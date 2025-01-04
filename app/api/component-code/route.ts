@@ -22,19 +22,14 @@ export async function GET(request: NextRequest) {
   }
 
   const relativeFilePath = componentMap[component];
+  const fullPath = path.join(process.cwd(), relativeFilePath);
 
   try {
-    const buildPath = path.join(process.cwd(), '.next', 'server', relativeFilePath);
-    const devPath = path.join(process.cwd(), relativeFilePath);
-
-    // Check environment and read appropriate path
-    const isDev = process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview';
-    const fullPath = isDev ? devPath : buildPath;
-
+    console.log('Fetching file from path:', fullPath);
     const code = await fs.readFile(fullPath, 'utf-8');
     return new NextResponse(code, { headers: { 'Content-Type': 'text/plain' } });
   } catch (error) {
-    console.error('Error fetching component code:', error);
+    console.error('Error fetching component code:', error, 'Path:', fullPath);
     return NextResponse.json({ error: 'Failed to fetch component code' }, { status: 500 });
   }
 }
