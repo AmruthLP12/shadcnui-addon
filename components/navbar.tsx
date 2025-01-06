@@ -115,7 +115,7 @@ export function Navbar() {
               </div>
             </DialogContent>
           </Dialog>
-          <Button variant="ghost" size="icon" aria-label="GitHub">
+          <Button variant="ghost" size="icon" aria-label="GitHub" asChild>
             <Link href="https://github.com/AmruthLP12/shadcnui-addon" target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4" />
               <span className="sr-only">GitHub</span>
