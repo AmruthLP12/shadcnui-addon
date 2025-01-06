@@ -27,6 +27,10 @@ const componentMap: { [key: string]: string } = {
   'InvoiceTableDemo': "app/components/InvoiceTable/InvoiceTableDemo.tsx",
   'BasicInvoiceTable': "app/components/InvoiceTable/BasicInvoiceTable.tsx",
   'AdvancedInvoiceTable': "app/components/InvoiceTable/AdvancedInvoiceTable.tsx",
+
+  // ? KanbanBoard
+  'KanbanBoard': "app/components/KanbanBoard/KanbanBoard.tsx",
+  'KanbanBoardDemo': "app/components/KanbanBoard/KanbanBoardDemo.tsx",
 };
 
 export async function GET(request: NextRequest) {

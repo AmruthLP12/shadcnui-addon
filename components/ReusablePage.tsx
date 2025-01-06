@@ -22,7 +22,7 @@ interface ReusablePageProps {
   demoCode: string;
   demoPreview: React.ReactNode;
   installationCode: string;
-  examples: UsageExample[];
+  examples?: UsageExample[];
 }
 
 export const ReusablePage: React.FC<ReusablePageProps> = ({
@@ -59,9 +59,9 @@ export const ReusablePage: React.FC<ReusablePageProps> = ({
         <InstallationGuide componentName={title} componentCode={installationCode} />
       </Section>
 
-      <Section title="Usage Examples">
+      <Section title= {examples? "Usage Examples": ""}>
         <div className="grid gap-8">
-          {examples.map((example, index) => (
+          {examples?.map((example, index) => (
             <Card key={index} title={example.title}>
               <CodePreview code={example.code} preview={example.preview} />
             </Card>

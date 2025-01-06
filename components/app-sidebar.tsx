@@ -27,6 +27,7 @@ const navItems = [
       { title: "Progress Bar", url: "/docs/animated-progress-bar" },
       { title: "Background Overlay Card", url: "/docs/card" },
       { title: "InvoiceTable", url: "/docs/invoice-table" },
+      { title: "Kanban Board", url: "/docs/kanban-board" },
     ],
   },
   {
