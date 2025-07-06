@@ -1,19 +1,10 @@
-'use client'
+'use client';
 import { AppSidebar } from "@/components/app-sidebar";
 import { Navbar } from "@/components/navbar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import "../globals.css";
-import { MetadataProvider, useMetadata } from "@/context/MetadataContext";
-
-function MetadataUpdater() {
-  const { title, description } = useMetadata();
-  return (
-    <head>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-    </head>
-  );
-}
+import { MetadataProvider } from "@/context/MetadataContext";
+import { MetadataUpdater } from "@/context/MetadataUpdater"; // use next/head version
 
 export default function LayoutWithSidebar({
   children,
@@ -22,7 +13,7 @@ export default function LayoutWithSidebar({
 }) {
   return (
     <MetadataProvider>
-      <MetadataUpdater />
+      <MetadataUpdater /> {/* ✅ Injects into <head> safely */}
       <div className="flex flex-col min-h-screen">
         <SidebarProvider>
           <Navbar />
